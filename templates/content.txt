@@ -1,0 +1,37 @@
+// Tutorial 2, content.js
+
+// Technique 1
+// var elements = document.getElementsByTagName('*');
+for (e of document.getElementsByTagName('*')) {
+   var c = "rgb(" + Math.floor(Math.random()*255)
+            + "," + Math.floor(Math.random()*255)
+            + "," + Math.floor(Math.random()*255) + ")"
+
+   // For testing:
+   //console.log(e);
+   e.style.setProperty('background-color',c);
+}
+
+// Technique 2
+var html = document.querySelector('html');
+var walker = document.createTreeWalker(html, NodeFilter.SHOW_TEXT);
+var node;
+while (node = walker.nextNode()) {
+   node.nodeValue = node.nodeValue.replace(/announcement/gi, 'kewl stuff')
+}
+
+// Technique 3
+chrome.storage.sync.get({fromStored: "", toStored: ""}, function(result) {
+
+    var html = document.querySelector('html');
+    var walker = document.createTreeWalker(html, NodeFilter.SHOW_TEXT);
+    var node;
+    while (node = walker.nextNode()) {
+        var re = new RegExp(result.fromStored,"gi");
+        node.nodeValue = node.nodeValue.replace(re, result.toStored);
+      }
+
+      console.log("\n\n\n\n\n ...eli extension...\n\n\n\n\n");
+    });
+}
+

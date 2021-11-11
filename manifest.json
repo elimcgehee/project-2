@@ -1,17 +1,27 @@
 {
   "manifest_version": 2,
-  "name": "PROJECT NAME",
-  "description": "PROJECT DESCRIPTION",
+  "name": "Collage",
+  "description": "This extension puts a few things out of place on the user's browser... But in an artistic way maybe?",
   "version": "0.1",
+  "author": "Eli McGehee",
+
+  "icons": {
+    "128": "media/icon.png"
+  },
+  "web_accessible_resources": [
+		"media/*"
+	],
+  "permissions": [
+    "storage",
+    "tabs",
+		"<all_urls>"
+  ],
   "content_scripts": [
     {
-      "matches": [
-        "*://*/*"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "run_at": "document_end"
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "matches": [ "<all_urls>" ]
     }
-  ]
+  ],
+  "options_page": "options.html"
 }
